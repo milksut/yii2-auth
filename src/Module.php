@@ -13,11 +13,17 @@ class Module extends \portalium\base\Module
 
     public static $description = 'auth Module';
 
+    // Auth events
+    const EVENT_ON_LOGIN = 'onLogin';
+    const EVENT_ON_LOGOUT = 'onLogout';
+    const EVENT_ON_SIGNUP = 'onSignup';
+
     public $apiRules = [
         [
             'class' => 'yii\rest\UrlRule',
             'controller' => [
                 'auth/default',
+                'auth/auth',
             ]
         ],
     ];
