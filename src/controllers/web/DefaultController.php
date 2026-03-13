@@ -47,7 +47,8 @@ class DefaultController extends WebController
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['index', 'login', 'login-google', 'callback-google', 'login-apple', 'callback-apple'],
+                        'actions' => ['index', 'login', 'login-google', 'callback-google',
+                        'login-apple', 'callback-apple', 'signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -99,7 +100,7 @@ class DefaultController extends WebController
      */
     public function actionIndex()
     {
-        return $this->redirect('login');
+        return $this->redirect('default/login');
     }
 
     /**
