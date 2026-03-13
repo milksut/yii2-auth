@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use portalium\auth\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\base\InvalidParamException;
+//use yii\base\InvalidParamException;
 use portalium\auth\models\LoginForm;
 use yii\web\BadRequestHttpException;
 use portalium\auth\models\SignupForm;
@@ -47,8 +47,7 @@ class DefaultController extends WebController
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['index', 'login', 'login-google', 'callback-google',
-                        'login-apple', 'callback-apple', 'signup'],
+                        'actions' => ['index', 'login', 'login-google', 'callback-google', 'login-apple', 'callback-apple','signup'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
@@ -99,8 +98,8 @@ class DefaultController extends WebController
      * @return \yii\web\Response
      */
     public function actionIndex()
-    {
-        return $this->redirect('default/login');
+    {  
+        return $this->redirect('login');
     }
 
     /**
@@ -373,7 +372,7 @@ class DefaultController extends WebController
     {
         try {
             $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
