@@ -15,6 +15,7 @@ class m260314_000002_add_social_url_settings extends Migration
             'label' => 'Slack URL (Leave empty to hide)',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enter the Slack workspace URL to show the icon on auth pages. Leave empty to hide.'
             ])
@@ -26,6 +27,7 @@ class m260314_000002_add_social_url_settings extends Migration
             'label' => 'GitHub URL (Leave empty to hide)',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enter the GitHub organization URL to show the icon on auth pages. Leave empty to hide.'
             ])
@@ -37,6 +39,7 @@ class m260314_000002_add_social_url_settings extends Migration
             'label' => 'Jira URL (Leave empty to hide)',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enter the Jira project URL to show the icon on auth pages. Leave empty to hide.'
             ])
@@ -48,6 +51,7 @@ class m260314_000002_add_social_url_settings extends Migration
             'label' => 'Notion URL (Leave empty to hide)',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enter the Notion workspace URL to show the icon on auth pages. Leave empty to hide.'
             ])
@@ -59,6 +63,7 @@ class m260314_000002_add_social_url_settings extends Migration
             'label' => 'LinkedIn URL (Leave empty to hide)',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enter the LinkedIn page URL to show the icon on auth pages. Leave empty to hide.'
             ])
