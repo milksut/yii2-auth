@@ -142,7 +142,6 @@ class AuthController extends Controller
     public function actionGoogleSignin()
     {
         $idToken = Yii::$app->request->getBodyParam('id_token');
-        Yii::warning('Google ID token received: ' . $idToken, 'oauth');
         if (empty($idToken)) {
             Yii::$app->response->statusCode = 400;
             return [
@@ -279,14 +278,8 @@ class AuthController extends Controller
             'keyId' => Yii::$app->setting->getValue('auth::appleKeyId'),
             'clientId' => Yii::$app->setting->getValue('auth::appleClientId'),
         ]);
-        Yii::warning('Apple OAuth config: ' . json_encode([
-            'teamId' => $appleHelper->teamId,
-            'keyId' => $appleHelper->keyId,
-            'clientId' => $appleHelper->clientId,
-        ]), 'oauth');
-        Yii::warning('Apple ID token received: ' . $idToken, 'oauth');
+
         $tokenData = $appleHelper->decodeIdToken($idToken);
-        Yii::warning('Apple ID token data: ' . json_encode($tokenData), 'oauth');
         if (!$tokenData || empty($tokenData['email'])) {
             return false;
         }

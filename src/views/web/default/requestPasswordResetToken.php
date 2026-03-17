@@ -6,7 +6,7 @@ use portalium\theme\widgets\ActiveForm;
 use portalium\theme\bundles\IconAsset;
 
 $this->title = Module::t('Request password reset');
-$this->context->layout = '@vendor/portalium/yii2-auth/src/views/web/layouts/auth';
+$this->context->layout = '@vendor/portalium/yii2-theme/src/layouts/auth';
 
 $iconBundle = IconAsset::register($this);
 ?>

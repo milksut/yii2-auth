@@ -76,10 +76,8 @@ class AppleJWTHelper extends Component
             if (count($parts) !== 3) {
                 throw new \Exception('Invalid ID token format');
             }
-
             // Decode payload without verification for now
             $payload = json_decode(base64_decode(strtr($parts[1], '-_', '+/')), true);
-            Yii::warning('Decoded Apple ID token payload: ' . print_r($payload, true), 'oauth');
             // Basic validation
             if (!$payload) {
                 throw new \Exception('Invalid audience in ID token');

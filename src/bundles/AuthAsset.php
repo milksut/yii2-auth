@@ -16,6 +16,10 @@ class AuthAsset extends AssetBundle
     public $depends = [
         AppAsset::class,
     ];
+    
+    public $jsOptions = [
+        'appendTimestamp' => true,
+    ];
 
     public $publishOptions = [
         'forceCopy' => YII_DEBUG,

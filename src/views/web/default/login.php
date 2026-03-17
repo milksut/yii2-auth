@@ -7,7 +7,7 @@ use portalium\theme\bundles\IconAsset;
 use portalium\auth\Module;
 
 $this->title = Module::t('Login');
-$this->context->layout = '@vendor/portalium/yii2-auth/src/views/web/layouts/auth';
+$this->context->layout = '@vendor/portalium/yii2-theme/src/layouts/auth';
 
 $iconBundle = IconAsset::register($this);
 ?>
@@ -45,6 +45,28 @@ $iconBundle = IconAsset::register($this);
             <p class="auth-hero-subtitle"><?= Html::encode($_heroSubtitle) ?></p>
         </div>
 
+        <!-- Feature Grid -->
+        <div class="auth-features">
+            <div class="auth-feature-grid">
+                <div class="auth-feature-card">
+                    <span class="auth-feature-title"><?= Module::t('Vision To Insight') ?></span>
+                    <span class="auth-feature-text"><?= Module::t('Transform your business.') ?></span>
+                </div>
+                <div class="auth-feature-card">
+                    <span class="auth-feature-title"><?= Module::t('Real-Time AI') ?></span>
+                    <span class="auth-feature-text"><?= Module::t('Start operational intelligence.') ?></span>
+                </div>
+                <div class="auth-feature-card">
+                    <span class="auth-feature-title"><?= Module::t('Data To Action') ?></span>
+                    <span class="auth-feature-text"><?= Module::t('Fast, reliable, and at scale.') ?></span>
+                </div>
+                <div class="auth-feature-card">
+                    <span class="auth-feature-title"><?= Module::t('Increase Productivity') ?></span>
+                    <span class="auth-feature-text"><?= Module::t('One platform for real world.') ?></span>
+                </div>
+            </div>
+        </div>
+
         <!-- Bottom: Integration Badges -->
         <?php
         $_integrations = [
@@ -67,15 +89,15 @@ $iconBundle = IconAsset::register($this);
         }
         ?>
         <?php if (!empty($_visibleIntegrations)): ?>
-        <div class="auth-badges">
-            <div class="auth-badges-list">
-                <?php foreach ($_visibleIntegrations as $_name => $_item): ?>
-                <a href="<?= Html::encode($_item['url']) ?>" target="_blank" rel="noopener noreferrer" class="auth-badge" title="<?= Html::encode(ucfirst($_name)) ?>">
-                    <?= $_item['svg'] ?>
-                </a>
-                <?php endforeach; ?>
+            <div class="auth-badges">
+                <div class="auth-badges-list">
+                    <?php foreach ($_visibleIntegrations as $_name => $_item): ?>
+                        <a href="<?= Html::encode($_item['url']) ?>" target="_blank" rel="noopener noreferrer" class="auth-badge" title="<?= Html::encode(ucfirst($_name)) ?>">
+                            <?= $_item['svg'] ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
             </div>
-        </div>
         <?php endif; ?>
     </div>
 
@@ -146,18 +168,54 @@ $iconBundle = IconAsset::register($this);
 
             <div>
                 <?= Html::submitButton(Module::t('Sign In'), [
-                    'class' => 'btn btn-outline-success auth-btn',
+                    'class' => 'btn btn-outline-success auth-btn mb-3',
                     'name' => 'login-button',
                 ]) ?>
             </div>
 
             <?php ActiveForm::end(); ?>
+            <!-- Continue with Google -->
+            <?php if (Yii::$app->setting->getValue('auth::googleEnabled')): ?>
+                <button type="button" class="auth-btn-social mb-3">
+                    <svg class="auth-icon-xs" viewBox="0 0 24 24">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                    </svg>
+                    <?= Module::t('Continue with Google') ?>
+                </button>
+            <?php endif; ?>
+            <?php if (Yii::$app->setting->getValue('auth::githubEnabled')): ?>
+                <button type="button" class="auth-btn-social mb-3">
+                    <svg class="auth-icon-xs" viewBox="0 0 24 24" fill="white">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23c .66 1 .24 2 .12 3 .765 .84 1 .23 1 .23c .23 .23 .23 .53 .23 .93c0 .67 -.01 1 -.01 1s -.77 .17 -1 -.17c -.01 -.17 -.01 -.77 -.01 -1c0 -.77 .47 -1 .47 -1c -.47 -.32 -.01 -.32 -.01 -.32c .47 -.32 .8 -.22 .8 -.22c .8 .55 1 .22 1 .22c .8 -0 .55 -0 .55 -0c -.55 -0 -0 -0 -0 -0c .8 .55 1 .22 1 .22c .8 -.55 .23 -.55 .23 -.55c -.55 -0 -.01 -.43 -.01 -.43c .01 -.43 .47 -.32 .47 -.32c .47 -.32 1.23 -.22 1.23 -.22c .8 .55 1.23 1.22 1.23 1.22c .8 1.22 2.09 .87 2.6 .67c .08 -.52 .31 -.87 .56 -1.07c -2.67 -.3 -5.47 -1.33 -5.47 -5.93c0 -1.31 .47 -2.38 1.24 -3.22c -.12 -.3 -.54 -1.5 .12 -3.13c0 0 1.01 -.32 3.3 1.23c .96 -.27 2 -.4 3.03 -.4s2.07 .13 3.03 .4c2.29 -1.56 3.3 -1.23 3.3 -1.23c .66 1.65 .24 2.88 .12 3.18c .77 .84 1.24 1.91 1.24 3.22c0 4.61 -2.8 5.63 -5.48 5.92c .31 .27 .59 .81 .59 1.63c0 1.17 -.01 2.11 -.01 2.39c0 .26 .17 .57 .82 .47A12 12 0 0 0 24 12c0 -6.63 -5.37 -12 -12 -12z" />
+                    </svg>
+                    <?= Module::t('Continue with GitHub') ?>
+                </button>
+            <?php endif; ?>
+            <?php if (Yii::$app->setting->getValue('auth::appleEnabled')): ?>
+                <button type="button" class="auth-btn-social mb-3">
+                    <svg class="auth-icon-xs" viewBox="0 0 24 24" fill="white">
+                        <path d="M16.365 1.43c0 1.14-.46 2.17-1.2 2.93-.74.76-1.72 1.25-2.84 1.25s-2.1-.49-2.84-1.25c-.74-.76-1.2-1.79-1.2-2.93C8.365.29 9.825-.17 11 .17c1.18.36 2.365-.17 3.365-2.74zM12 4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6z" />
+                    </svg>
+                    <?= Module::t('Continue with Apple') ?>
+                </button>
+            <?php endif; ?>
+            <?php if (Yii::$app->setting->getValue('auth::twitterEnabled')): ?>
+                <button type="button" class="auth-btn-social mb-3">
+                    <svg class="auth-icon-xs" viewBox="0 0 24 24" fill="white">
+                        <path d="M23.954 4.569c-.885.39-1.83.654-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.949.555-2.005.959-3.127 1.184-.897-.959-2.178-1.559-3.594-1.559-2.717 0-4.92 2.203-4.92 4.917 0 .39 .045 .765 .127 1.124C7.691 8.094 4.066 6.13 1.64 3.161c-.427 .722-.666 1.561-.666 2.475 0 1.708 .87 3.216 2.188 4.099-.807-.026-1.566-.248-2.228-.616v .061c0 2.385 1.693 4.374 3.946 4.827-.413 .111-.849 .171-1.296 .171-.317 0-.626-.03-.927-.086 .627 1.956 2.444 3.379 4.6 3.419-1.68 1.318-3.808 2.105-6.102 2.105-.396 0-.787-.023-1.17-.067C2..29 19..29 5..03 20..5c6..29 0 9..73-5..21 9..73-9..73l -.01 -.443c .67 -.48 1..25 -1..08 1..71 -1..42z" />
+                    </svg>
+                    <?= Module::t('Continue with Twitter') ?>
+                </button>
+            <?php endif; ?>
 
             <?php if (Yii::$app->setting->getValue('form::signup')): ?>
-            <div class="auth-footer">
-                <?= Module::t("Don't have an account?") ?>
-                <?= Html::a(Module::t('Sign up'), ['/auth/default/signup']) ?>
-            </div>
+                <div class="auth-footer">
+                    <?= Module::t("Don't have an account?") ?>
+                    <?= Html::a(Module::t('Sign up'), ['/auth/default/signup']) ?>
+                </div>
             <?php endif; ?>
         </div>
     </div>
