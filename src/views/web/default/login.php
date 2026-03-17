@@ -166,6 +166,31 @@ foreach ($_integrationNames as $_name) {
                 ]) ?>
             </div>
             <?php ActiveForm::end(); ?>
+            <?php
+            $providers = [
+                'google' => 'Google',
+                'apple' => 'Apple',
+                'github' => 'GitHub',
+                'linkedin' => 'LinkedIn',
+                'twitter' => 'Twitter',
+            ];
+            $hasSocial = false;
+            foreach ($providers as $key => $label) {
+                try {
+                    $isEnabled = Yii::$app->setting->getValue('auth::' . $key . 'Enabled');
+                } catch (\Exception $e) {
+                    $isEnabled = false;
+                }
+                if ($isEnabled) {
+                    $hasSocial = true;
+                    echo Html::a(
+                        Html::img($authBundle->baseUrl . '/icons/' . $key . '.svg', ['alt' => $label . ' icon', 'class' => 'auth-icon-xs']) . ' ' . Module::t('Continue with {provider}', ['provider' => $label]),
+                        ['/auth/default/login-' . $key],
+                        ['class' => 'auth-btn-social mb-3']
+                    );
+                }
+            }
+            ?>
             <?php if (Yii::$app->setting->getValue('form::signup')): ?>
                 <div class="auth-footer">
                     <?= Module::t("Don't have an account?") ?>

@@ -100,15 +100,38 @@ foreach ($_integrationNames as $_name) {
                 <?= Module::t('You are already logged in. You cannot register.') ?>
             </div>
             <?php else: ?>
-            <button type="button" class="auth-btn-social mb-3">
-                <?= Html::img($authBundle->baseUrl . '/icons/google.svg', ['alt' => 'Google icon', 'class' => 'auth-icon-xs']) ?>
-                <?= Module::t('Continue with Google') ?>
-            </button>
+            <?php
+            $providers = [
+                'google' => 'Google',
+                'apple' => 'Apple',
+                'github' => 'GitHub',
+                'linkedin' => 'LinkedIn',
+                'twitter' => 'Twitter',
+            ];
+            $hasSocial = false;
+            foreach ($providers as $key => $label) {
+                try {
+                    $isEnabled = Yii::$app->setting->getValue('auth::' . $key . 'Enabled');
+                } catch (\Exception $e) {
+                    $isEnabled = false;
+                }
+                if ($isEnabled) {
+                    $hasSocial = true;
+                    echo Html::a(
+                        Html::img($authBundle->baseUrl . '/icons/' . $key . '.svg', ['alt' => $label . ' icon', 'class' => 'auth-icon-xs']) . ' ' . Module::t('Continue with {provider}', ['provider' => $label]),
+                        ['/auth/default/login-' . $key],
+                        ['class' => 'auth-btn-social mb-3']
+                    );
+                }
+            }
+            ?>
+            <?php if ($hasSocial): ?>
             <div class="auth-divider">
                 <div class="auth-divider-line"></div>
                 <span class="auth-divider-text"><?= Module::t('or register with email') ?></span>
                 <div class="auth-divider-line"></div>
             </div>
+            <?php endif; ?>
             <?php $form = ActiveForm::begin([
                 'id' => 'form-signup',
                 'fieldConfig' => [
