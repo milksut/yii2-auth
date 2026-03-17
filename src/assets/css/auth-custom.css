@@ -22,7 +22,6 @@
 }
 
 /* ============================================================
-<<<<<<< HEAD
    DEEP EMERALD GREEN OVERRIDE
    ============================================================ */
 .mesh-gradient {
@@ -35,11 +34,6 @@
 }
 
 /* ============================================================
-   NOVA-STYLE BRAND LOGO POSITIONING
-   Detaches logo from flex center flow, pins to offset corner.
-   ============================================================ */
-.auth-panel-left .auth-brand {
-=======
    LEFT PANEL (dark branding column)
    ============================================================ */
 .auth-left-panel {
@@ -54,14 +48,11 @@
 }
 
 .auth-left-panel .auth-brand {
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
     position: absolute !important;
     top: 15% !important;
     left: 10% !important;
     z-index: 10 !important;
 }
-<<<<<<< HEAD
-=======
 
 @media (max-width: 991.98px) {
     .auth-left-panel {
@@ -94,4 +85,3 @@
     width: 100%;
     max-width: 32rem;
 }
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a

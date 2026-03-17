@@ -2,11 +2,6 @@
 
 use yii\helpers\Html;
 use portalium\theme\widgets\ActiveForm;
-<<<<<<< HEAD
-use portalium\auth\bundles\AuthAsset;
-use portalium\theme\bundles\IconAsset;
-=======
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
 use portalium\auth\Module;
 use portalium\auth\bundles\AuthAsset;
 use portalium\theme\bundles\IconAsset;
@@ -68,14 +63,7 @@ foreach ($_integrationNames as $_name) {
 }
 ?>
 <div class="auth-fullscreen-wrapper">
-<<<<<<< HEAD
-
-    <!-- Left Panel: Brand & Info -->
-    <div class="auth-panel-left mesh-gradient">
-        <!-- Top-Left: Brand Header -->
-=======
     <div class="auth-left-panel mesh-gradient">
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <div class="auth-brand">
             <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
                 'alt' => $_appTitle,
@@ -87,9 +75,6 @@ foreach ($_integrationNames as $_name) {
             <h2 class="auth-hero-title"><?= Html::encode($_heroTitle) ?></h2>
             <p class="auth-hero-subtitle"><?= Html::encode($_heroSubtitle) ?></p>
         </div>
-<<<<<<< HEAD
-
-        <!-- Feature Grid -->
         <div class="auth-features">
             <div class="auth-feature-grid">
                 <div class="auth-feature-card">
@@ -110,32 +95,6 @@ foreach ($_integrationNames as $_name) {
                 </div>
             </div>
         </div>
-
-        <!-- Bottom: Integration Badges -->
-        <?php
-        $_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin'];
-        $_visibleIntegrations = [];
-        foreach ($_integrationNames as $_name) {
-            try {
-                $_url = trim(Yii::$app->setting->getValue('auth::' . $_name . '_url') ?? '');
-            } catch (\Exception $e) {
-                $_url = '';
-            }
-            if (!empty($_url)) {
-                $_visibleIntegrations[$_name] = $_url;
-            }
-        }
-        ?>
-        <?php if (!empty($_visibleIntegrations)): ?>
-            <div class="auth-badges">
-                <div class="auth-badges-list">
-                    <?php foreach ($_visibleIntegrations as $_name => $_url): ?>
-                        <a href="<?= Html::encode($_url) ?>" target="_blank" rel="noopener noreferrer" class="auth-badge" title="<?= Html::encode(ucfirst($_name)) ?>">
-                            <?= Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', ['class' => 'auth-icon-sm', 'alt' => ucfirst($_name)]) ?>
-                        </a>
-                    <?php endforeach; ?>
-                </div>
-=======
         <?php if (!empty($_visibleIntegrations)): ?>
         <div class="auth-badges">
             <div class="auth-badges-list">
@@ -154,8 +113,8 @@ foreach ($_integrationNames as $_name) {
                     ]
                 ) ?>
                 <?php endforeach; ?>
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
             </div>
+        </div>
         <?php endif; ?>
     </div>
     <div class="auth-right-panel">
@@ -207,35 +166,6 @@ foreach ($_integrationNames as $_name) {
                 ]) ?>
             </div>
             <?php ActiveForm::end(); ?>
-<<<<<<< HEAD
-            <!-- Continue with Google -->
-            <?php if (Yii::$app->setting->getValue('auth::googleEnabled')): ?>
-                <button type="button" class="auth-btn-social mb-3">
-                    <?= Html::img($authBundle->baseUrl . '/icons/google.svg', ['class' => 'auth-icon-xs', 'alt' => 'Google']) ?>
-                    <?= Module::t('Continue with Google') ?>
-                </button>
-            <?php endif; ?>
-            <?php if (Yii::$app->setting->getValue('auth::githubEnabled')): ?>
-                <button type="button" class="auth-btn-social mb-3">
-                    <?= Html::img($authBundle->baseUrl . '/icons/github.svg', ['class' => 'auth-icon-xs', 'alt' => 'GitHub']) ?>
-                    <?= Module::t('Continue with GitHub') ?>
-                </button>
-            <?php endif; ?>
-            <?php if (Yii::$app->setting->getValue('auth::appleEnabled')): ?>
-                <button type="button" class="auth-btn-social mb-3">
-                    <?= Html::img($authBundle->baseUrl . '/icons/apple.svg', ['class' => 'auth-icon-xs', 'alt' => 'Apple']) ?>
-                    <?= Module::t('Continue with Apple') ?>
-                </button>
-            <?php endif; ?>
-            <?php if (Yii::$app->setting->getValue('auth::twitterEnabled')): ?>
-                <button type="button" class="auth-btn-social mb-3">
-                    <?= Html::img($authBundle->baseUrl . '/icons/twitter.svg', ['class' => 'auth-icon-xs', 'alt' => 'Twitter']) ?>
-                    <?= Module::t('Continue with Twitter') ?>
-                </button>
-            <?php endif; ?>
-
-=======
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
             <?php if (Yii::$app->setting->getValue('form::signup')): ?>
                 <div class="auth-footer">
                     <?= Module::t("Don't have an account?") ?>
@@ -244,9 +174,4 @@ foreach ($_integrationNames as $_name) {
             <?php endif; ?>
         </div>
     </div>
-<<<<<<< HEAD
-
 </div>
-=======
-</div>
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a

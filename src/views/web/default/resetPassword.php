@@ -4,56 +4,11 @@ use yii\helpers\Html;
 use portalium\theme\widgets\ActiveForm;
 use portalium\auth\Module;
 use portalium\auth\bundles\AuthAsset;
-<<<<<<< HEAD
-=======
 use portalium\theme\bundles\IconAsset;
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
 
 $this->title = Module::t('Reset password');
 
 $authBundle = AuthAsset::register($this);
-<<<<<<< HEAD
-?>
-<div class="auth-fullscreen-wrapper">
-
-    <!-- Left Panel: Brand & Info -->
-    <div class="auth-panel-left mesh-gradient">
-        <!-- Centered Content Block -->
-        <div class="auth-hero">
-            <!-- Hero Logo: DigiNova Network Node -->
-            <div class="auth-hero-logo">
-                <?= Html::img($authBundle->baseUrl . '/icons/hexagonal-network.svg', ['class' => 'auth-icon-lg', 'alt' => 'Network']) ?>
-            </div>
-            <!-- Logo Typography -->
-            <p class="auth-hero-brand-name"><?= Html::encode(trim(Yii::$app->setting->getValue('app::title') ?? 'Portalium')) ?></p>
-
-            <h2 class="auth-hero-title"><?= Html::encode(trim(Yii::$app->setting->getValue('auth::login_hero_title') ?? '')) ?></h2>
-            <p class="auth-hero-subtitle"><?= Html::encode(trim(Yii::$app->setting->getValue('auth::login_hero_subtitle') ?? '')) ?></p>
-
-            <!-- Integration Badges -->
-            <div class="auth-badges mt-5">
-                <p class="auth-badges-label"><?= Module::t('Integrates With:') ?></p>
-                <div class="auth-badges-list">
-                    <div class="auth-badge" title="Slack">
-                        <?= Html::img($authBundle->baseUrl . '/icons/slack.svg', ['class' => 'auth-icon-sm', 'alt' => 'Slack']) ?>
-                    </div>
-                    <div class="auth-badge" title="GitHub">
-                        <?= Html::img($authBundle->baseUrl . '/icons/github.svg', ['class' => 'auth-icon-sm', 'alt' => 'GitHub']) ?>
-                    </div>
-                    <div class="auth-badge" title="Jira">
-                        <?= Html::img($authBundle->baseUrl . '/icons/jira.svg', ['class' => 'auth-icon-sm', 'alt' => 'Jira']) ?>
-                    </div>
-                    <div class="auth-badge" title="Notion">
-                        <?= Html::img($authBundle->baseUrl . '/icons/notion.svg', ['class' => 'auth-icon-sm', 'alt' => 'Notion']) ?>
-                    </div>
-                    <div class="auth-badge" title="LinkedIn">
-                        <?= Html::img($authBundle->baseUrl . '/icons/linkedin.svg', ['class' => 'auth-icon-sm', 'alt' => 'LinkedIn']) ?>
-                    </div>
-                    <div class="auth-badge">
-                        <span class="auth-badge-text">+14</span>
-                    </div>
-                </div>
-=======
 $iconBundle = IconAsset::register($this);
 
 $_appTitle = Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium');
@@ -120,7 +75,6 @@ foreach ($_integrationNames as $_name) {
                     ]
                 ) ?>
                 <?php endforeach; ?>
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
             </div>
         </div>
         <?php endif; ?>
