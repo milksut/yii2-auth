@@ -45,14 +45,7 @@ foreach ($_integrationNames as $_name) {
 }
 ?>
 <div class="auth-fullscreen-wrapper">
-<<<<<<< HEAD
-
-    <!-- Left Panel: Brand & Info -->
-    <div class="auth-panel-left mesh-gradient">
-        <!-- Top-Left: Brand Header -->
-=======
     <div class="auth-left-panel mesh-gradient">
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <div class="auth-brand">
             <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
                 'alt' => $_appTitle,
@@ -64,34 +57,10 @@ foreach ($_integrationNames as $_name) {
             <h2 class="auth-hero-title"><?= Html::encode($_heroTitle) ?></h2>
             <p class="auth-hero-subtitle"><?= Html::encode($_heroSubtitle) ?></p>
         </div>
-<<<<<<< HEAD
-
-        <!-- Bottom: Integration Badges -->
-        <?php
-        $_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin'];
-        $_visibleIntegrations = [];
-        foreach ($_integrationNames as $_name) {
-            try {
-                $_url = trim(Yii::$app->setting->getValue('auth::' . $_name . '_url') ?? '');
-            } catch (\Exception $e) {
-                $_url = '';
-            }
-            if (!empty($_url)) {
-                $_visibleIntegrations[$_name] = $_url;
-            }
-        }
-        ?>
-=======
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <?php if (!empty($_visibleIntegrations)): ?>
         <div class="auth-badges">
             <div class="auth-badges-list">
                 <?php foreach ($_visibleIntegrations as $_name => $_url): ?>
-<<<<<<< HEAD
-                <a href="<?= Html::encode($_url) ?>" target="_blank" rel="noopener noreferrer" class="auth-badge" title="<?= Html::encode(ucfirst($_name)) ?>">
-                    <?= Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', ['class' => 'auth-icon-sm', 'alt' => ucfirst($_name)]) ?>
-                </a>
-=======
                 <?= Html::a(
                     Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', [
                         'alt' => ucfirst($_name) . ' icon',
@@ -105,7 +74,6 @@ foreach ($_integrationNames as $_name) {
                         'rel' => 'noopener noreferrer',
                     ]
                 ) ?>
->>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
                 <?php endforeach; ?>
             </div>
         </div>
