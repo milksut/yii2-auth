@@ -68,6 +68,18 @@ class m260314_000002_add_social_url_settings extends Migration
                 'help' => 'Enter the LinkedIn page URL to show the icon on auth pages. Leave empty to hide.'
             ])
         ]);
+
+        $this->insert(SiteModule::$tablePrefix . 'setting', [
+            'module' => 'auth',
+            'name' => 'auth::google_url',
+            'label' => 'Google URL (Leave empty to hide)',
+            'value' => '',
+            'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
+            'config' => json_encode([
+                'help' => 'Enter the Google workspace URL to show the icon on auth pages. Leave empty to hide.'
+            ])
+        ]);
     }
 
     public function safeDown()
@@ -77,5 +89,6 @@ class m260314_000002_add_social_url_settings extends Migration
         $this->delete(Module::$tablePrefix . 'setting', ['module' => 'auth', 'name' => 'auth::jira_url']);
         $this->delete(Module::$tablePrefix . 'setting', ['module' => 'auth', 'name' => 'auth::notion_url']);
         $this->delete(Module::$tablePrefix . 'setting', ['module' => 'auth', 'name' => 'auth::linkedin_url']);
+        $this->delete(Module::$tablePrefix . 'setting', ['module' => 'auth', 'name' => 'auth::google_url']);
     }
 }
