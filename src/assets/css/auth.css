@@ -13,6 +13,12 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+@media (min-width: 992px) {
+    .auth-layout-flipped {
+        flex-direction: row-reverse;
+    }
+}
+
 /* ============================================================
    LEFT PANEL (dark, brand)
    ============================================================ */
@@ -34,11 +40,12 @@
 }
 
 .mesh-gradient {
-    background-color: #000000;
+    background-color: #042014;
     background-image:
-        radial-gradient(at 0% 0%, hsla(146, 53%, 9%, 1) 0, transparent 50%),
-        radial-gradient(at 50% 0%, hsla(146, 53%, 15%, 1) 0, transparent 50%),
-        radial-gradient(at 100% 0%, hsla(146, 53%, 10%, 1) 0, transparent 50%);
+        radial-gradient(at 0% 0%, hsla(152, 60%, 10%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 50%, hsla(152, 55%, 16%, 1) 0, transparent 55%),
+        radial-gradient(at 100% 0%, hsla(152, 50%, 12%, 1) 0, transparent 50%),
+        radial-gradient(at 80% 100%, hsla(152, 60%, 8%, 1) 0, transparent 45%);
 }
 
 /* Brand header (top-left of left panel) */
@@ -481,6 +488,13 @@
 .auth-icon-sm  { width: 1.5rem;  height: 1.5rem;  }
 .auth-icon-md  { width: 2rem;    height: 2rem;    }
 .auth-icon-lg  { width: 8rem;    height: 8rem;    }
+
+.auth-badge-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    pointer-events: none;
+}
 
 /* ============================================================
    SCROLLBAR HIDE

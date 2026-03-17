@@ -1,50 +1,93 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use portalium\theme\widgets\ActiveForm;
+<<<<<<< HEAD
 use portalium\auth\bundles\AuthAsset;
 use portalium\theme\bundles\IconAsset;
+=======
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
 use portalium\auth\Module;
+use portalium\auth\bundles\AuthAsset;
+use portalium\theme\bundles\IconAsset;
 
 $this->title = Module::t('Login');
 
 $authBundle = AuthAsset::register($this);
 $iconBundle = IconAsset::register($this);
+
+$_appTitle = Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium');
+
+try {
+    $_heroTitle = trim(Yii::$app->setting->getValue('auth::login_hero_title') ?? '');
+} catch (\Exception $e) {
+    $_heroTitle = '';
+}
+if (empty($_heroTitle)) {
+    $_heroTitle = Module::t('One Command Center');
+}
+
+try {
+    $_heroSubtitle = trim(Yii::$app->setting->getValue('auth::login_hero_subtitle') ?? '');
+} catch (\Exception $e) {
+    $_heroSubtitle = '';
+}
+if (empty($_heroSubtitle)) {
+    $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
+}
+
+try {
+    $_formTitle = trim(Yii::$app->setting->getValue('auth::login_form_title') ?? '');
+} catch (\Exception $e) {
+    $_formTitle = '';
+}
+if (empty($_formTitle)) {
+    $_formTitle = Module::t('Sign in to Command Center');
+}
+
+try {
+    $_formSubtitle = trim(Yii::$app->setting->getValue('auth::login_form_subtitle') ?? '');
+} catch (\Exception $e) {
+    $_formSubtitle = '';
+}
+if (empty($_formSubtitle)) {
+    $_formSubtitle = Module::t('Enter your credentials to access your dashboard');
+}
+
+$_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin', 'google'];
+$_visibleIntegrations = [];
+foreach ($_integrationNames as $_name) {
+    try {
+        $_url = trim(Yii::$app->setting->getValue('auth::' . $_name . '_url') ?? '');
+    } catch (\Exception $e) {
+        $_url = '';
+    }
+    if (!empty($_url)) {
+        $_visibleIntegrations[$_name] = $_url;
+    }
+}
 ?>
 <div class="auth-fullscreen-wrapper">
+<<<<<<< HEAD
 
     <!-- Left Panel: Brand & Info -->
     <div class="auth-panel-left mesh-gradient">
         <!-- Top-Left: Brand Header -->
+=======
+    <div class="auth-left-panel mesh-gradient">
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <div class="auth-brand">
-            <img src="<?= $iconBundle->baseUrl ?>/favicon.ico" alt="<?= Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium') ?>" class="auth-icon-md auth-brand-logo">
-            <span class="auth-brand-name"><?= Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium') ?></span>
+            <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
+                'alt' => $_appTitle,
+                'class' => 'auth-icon-md auth-brand-logo',
+            ]) ?>
+            <span class="auth-brand-name"><?= $_appTitle ?></span>
         </div>
-
-        <!-- Center: Hero Content -->
         <div class="auth-hero">
-            <?php
-            try {
-                $_heroTitle = trim(Yii::$app->setting->getValue('auth::login_hero_title') ?? '');
-            } catch (\Exception $e) {
-                $_heroTitle = '';
-            }
-            if (empty($_heroTitle)) {
-                $_heroTitle = Module::t('One Command Center');
-            }
-            try {
-                $_heroSubtitle = trim(Yii::$app->setting->getValue('auth::login_hero_subtitle') ?? '');
-            } catch (\Exception $e) {
-                $_heroSubtitle = '';
-            }
-            if (empty($_heroSubtitle)) {
-                $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
-            }
-            ?>
             <h2 class="auth-hero-title"><?= Html::encode($_heroTitle) ?></h2>
             <p class="auth-hero-subtitle"><?= Html::encode($_heroSubtitle) ?></p>
         </div>
+<<<<<<< HEAD
 
         <!-- Feature Grid -->
         <div class="auth-features">
@@ -92,42 +135,42 @@ $iconBundle = IconAsset::register($this);
                         </a>
                     <?php endforeach; ?>
                 </div>
+=======
+        <?php if (!empty($_visibleIntegrations)): ?>
+        <div class="auth-badges">
+            <div class="auth-badges-list">
+                <?php foreach ($_visibleIntegrations as $_name => $_url): ?>
+                <?= Html::a(
+                    Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', [
+                        'alt' => ucfirst($_name) . ' icon',
+                        'class' => 'auth-badge-icon',
+                    ]),
+                    Html::encode($_url),
+                    [
+                        'class' => 'auth-badge',
+                        'title' => ucfirst($_name),
+                        'target' => '_blank',
+                        'rel' => 'noopener noreferrer',
+                    ]
+                ) ?>
+                <?php endforeach; ?>
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
             </div>
         <?php endif; ?>
     </div>
-
-    <!-- Right Panel: Login Form -->
-    <div class="auth-panel-right">
-        <div class="auth-form-container">
-            <!-- Mobile Logo -->
+    <div class="auth-right-panel">
+        <div class="auth-form-inner">
             <div class="auth-mobile-logo">
-                <span class="material-symbols-outlined text-success auth-mobile-logo-icon">polyline</span>
-                <span class="auth-mobile-logo-name"><?= Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium') ?></span>
+                <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
+                    'alt' => $_appTitle,
+                    'class' => 'auth-icon-md',
+                ]) ?>
+                <span class="auth-mobile-logo-name"><?= $_appTitle ?></span>
             </div>
-
             <div class="auth-form-header">
-                <?php
-                try {
-                    $_formTitle = trim(Yii::$app->setting->getValue('auth::login_form_title') ?? '');
-                } catch (\Exception $e) {
-                    $_formTitle = '';
-                }
-                if (empty($_formTitle)) {
-                    $_formTitle = Module::t('Sign in to Command Center');
-                }
-                try {
-                    $_formSubtitle = trim(Yii::$app->setting->getValue('auth::login_form_subtitle') ?? '');
-                } catch (\Exception $e) {
-                    $_formSubtitle = '';
-                }
-                if (empty($_formSubtitle)) {
-                    $_formSubtitle = Module::t('Enter your credentials to access your dashboard');
-                }
-                ?>
                 <h2 class="auth-form-title"><?= Html::encode($_formTitle) ?></h2>
                 <p class="auth-form-subtitle"><?= Html::encode($_formSubtitle) ?></p>
             </div>
-
             <?php $form = ActiveForm::begin([
                 'id' => 'login-form',
                 'fieldConfig' => [
@@ -135,18 +178,15 @@ $iconBundle = IconAsset::register($this);
                     'labelOptions' => ['class' => 'auth-label'],
                 ],
             ]); ?>
-
             <?= $form->field($model, 'username')->textInput([
                 'autofocus' => true,
                 'class' => 'auth-input',
                 'placeholder' => Module::t('name@company.com'),
             ]) ?>
-
             <?= $form->field($model, 'password')->passwordInput([
                 'class' => 'auth-input',
                 'placeholder' => '••••••••',
             ]) ?>
-
             <div class="auth-remember">
                 <div class="auth-remember-left">
                     <?= $form->field($model, 'rememberMe', ['template' => '{input}'])->checkbox([
@@ -160,15 +200,14 @@ $iconBundle = IconAsset::register($this);
                     ]) ?>
                 </div>
             </div>
-
             <div>
                 <?= Html::submitButton(Module::t('Sign In'), [
                     'class' => 'btn btn-outline-success auth-btn mb-3',
                     'name' => 'login-button',
                 ]) ?>
             </div>
-
             <?php ActiveForm::end(); ?>
+<<<<<<< HEAD
             <!-- Continue with Google -->
             <?php if (Yii::$app->setting->getValue('auth::googleEnabled')): ?>
                 <button type="button" class="auth-btn-social mb-3">
@@ -195,6 +234,8 @@ $iconBundle = IconAsset::register($this);
                 </button>
             <?php endif; ?>
 
+=======
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
             <?php if (Yii::$app->setting->getValue('form::signup')): ?>
                 <div class="auth-footer">
                     <?= Module::t("Don't have an account?") ?>
@@ -203,5 +244,9 @@ $iconBundle = IconAsset::register($this);
             <?php endif; ?>
         </div>
     </div>
+<<<<<<< HEAD
 
 </div>
+=======
+</div>
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a

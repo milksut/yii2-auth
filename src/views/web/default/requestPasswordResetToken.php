@@ -10,22 +10,61 @@ $this->title = Module::t('Request password reset');
 
 $authBundle = AuthAsset::register($this);
 $iconBundle = IconAsset::register($this);
+
+$_appTitle = Html::encode(Yii::$app->setting->getValue('app::title') ?? 'Portalium');
+
+try {
+    $_heroTitle = trim(Yii::$app->setting->getValue('auth::login_hero_title') ?? '');
+} catch (\Exception $e) {
+    $_heroTitle = '';
+}
+if (empty($_heroTitle)) {
+    $_heroTitle = Module::t('One Command Center');
+}
+
+try {
+    $_heroSubtitle = trim(Yii::$app->setting->getValue('auth::login_hero_subtitle') ?? '');
+} catch (\Exception $e) {
+    $_heroSubtitle = '';
+}
+if (empty($_heroSubtitle)) {
+    $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
+}
+
+$_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin', 'google'];
+$_visibleIntegrations = [];
+foreach ($_integrationNames as $_name) {
+    try {
+        $_url = trim(Yii::$app->setting->getValue('auth::' . $_name . '_url') ?? '');
+    } catch (\Exception $e) {
+        $_url = '';
+    }
+    if (!empty($_url)) {
+        $_visibleIntegrations[$_name] = $_url;
+    }
+}
 ?>
 <div class="auth-fullscreen-wrapper">
+<<<<<<< HEAD
 
     <!-- Left Panel: Brand & Info -->
     <div class="auth-panel-left mesh-gradient">
         <!-- Top-Left: Brand Header -->
+=======
+    <div class="auth-left-panel mesh-gradient">
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <div class="auth-brand">
-            <img src="<?= $iconBundle->baseUrl ?>/favicon.ico" alt="Portalium" class="auth-icon-md auth-brand-logo">
-            <span class="auth-brand-name"><?= Html::encode(trim(Yii::$app->setting->getValue('app::title') ?? 'Portalium')) ?></span>
+            <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
+                'alt' => $_appTitle,
+                'class' => 'auth-icon-md auth-brand-logo',
+            ]) ?>
+            <span class="auth-brand-name"><?= $_appTitle ?></span>
         </div>
-
-        <!-- Center: Hero Content -->
         <div class="auth-hero">
-            <h2 class="auth-hero-title"><?= Html::encode(trim(Yii::$app->setting->getValue('auth::login_hero_title') ?? '')) ?></h2>
-            <p class="auth-hero-subtitle"><?= Html::encode(trim(Yii::$app->setting->getValue('auth::login_hero_subtitle') ?? '')) ?></p>
+            <h2 class="auth-hero-title"><?= Html::encode($_heroTitle) ?></h2>
+            <p class="auth-hero-subtitle"><?= Html::encode($_heroSubtitle) ?></p>
         </div>
+<<<<<<< HEAD
 
         <!-- Bottom: Integration Badges -->
         <?php
@@ -42,33 +81,49 @@ $iconBundle = IconAsset::register($this);
             }
         }
         ?>
+=======
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
         <?php if (!empty($_visibleIntegrations)): ?>
         <div class="auth-badges">
             <div class="auth-badges-list">
                 <?php foreach ($_visibleIntegrations as $_name => $_url): ?>
+<<<<<<< HEAD
                 <a href="<?= Html::encode($_url) ?>" target="_blank" rel="noopener noreferrer" class="auth-badge" title="<?= Html::encode(ucfirst($_name)) ?>">
                     <?= Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', ['class' => 'auth-icon-sm', 'alt' => ucfirst($_name)]) ?>
                 </a>
+=======
+                <?= Html::a(
+                    Html::img($authBundle->baseUrl . '/icons/' . $_name . '.svg', [
+                        'alt' => ucfirst($_name) . ' icon',
+                        'class' => 'auth-badge-icon',
+                    ]),
+                    Html::encode($_url),
+                    [
+                        'class' => 'auth-badge',
+                        'title' => ucfirst($_name),
+                        'target' => '_blank',
+                        'rel' => 'noopener noreferrer',
+                    ]
+                ) ?>
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
                 <?php endforeach; ?>
             </div>
         </div>
         <?php endif; ?>
     </div>
-
-    <!-- Right Panel: Password Reset Form -->
-    <div class="auth-panel-right">
-        <div class="auth-form-container">
-            <!-- Mobile Logo -->
+    <div class="auth-right-panel">
+        <div class="auth-form-inner">
             <div class="auth-mobile-logo">
-                <span class="material-symbols-outlined text-success auth-mobile-logo-icon">polyline</span>
-                <span class="auth-mobile-logo-name">Portalium</span>
+                <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
+                    'alt' => $_appTitle,
+                    'class' => 'auth-icon-md',
+                ]) ?>
+                <span class="auth-mobile-logo-name"><?= $_appTitle ?></span>
             </div>
-
             <div class="auth-form-header">
                 <h2 class="auth-form-title"><?= Module::t('Secure Password Recovery') ?></h2>
                 <p class="auth-form-subtitle"><?= Module::t('Enter your enterprise email to receive recovery instructions.') ?></p>
             </div>
-
             <?php $form = ActiveForm::begin([
                 'id' => 'request-password-reset-form',
                 'fieldConfig' => [
@@ -76,26 +131,21 @@ $iconBundle = IconAsset::register($this);
                     'labelOptions' => ['class' => 'auth-label'],
                 ],
             ]); ?>
-
             <?= $form->field($model, 'email')->textInput([
                 'autofocus' => true,
                 'class' => 'auth-input',
                 'placeholder' => Module::t('name@company.com'),
             ]) ?>
-
             <div>
                 <?= Html::submitButton(Module::t('Send Reset Link'), [
                     'class' => 'btn btn-outline-success auth-btn',
                     'name' => 'reset-button',
                 ]) ?>
             </div>
-
             <?php ActiveForm::end(); ?>
-
             <div class="auth-footer">
                 <?= Html::a(Module::t('Back to Login'), ['/auth/default/login']) ?>
             </div>
         </div>
     </div>
-
 </div>

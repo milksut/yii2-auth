@@ -22,6 +22,7 @@
 }
 
 /* ============================================================
+<<<<<<< HEAD
    DEEP EMERALD GREEN OVERRIDE
    ============================================================ */
 .mesh-gradient {
@@ -38,8 +39,59 @@
    Detaches logo from flex center flow, pins to offset corner.
    ============================================================ */
 .auth-panel-left .auth-brand {
+=======
+   LEFT PANEL (dark branding column)
+   ============================================================ */
+.auth-left-panel {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    padding: 3rem !important;
+}
+
+.auth-left-panel .auth-brand {
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
     position: absolute !important;
     top: 15% !important;
     left: 10% !important;
     z-index: 10 !important;
 }
+<<<<<<< HEAD
+=======
+
+@media (max-width: 991.98px) {
+    .auth-left-panel {
+        display: none !important;
+    }
+}
+
+/* ============================================================
+   RIGHT PANEL (white form column)
+   ============================================================ */
+.auth-right-panel {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 2rem !important;
+    overflow-y: auto !important;
+    background-color: #fff !important;
+}
+
+/* ============================================================
+   FORM INNER CONTAINERS
+   ============================================================ */
+.auth-form-inner {
+    width: 100%;
+    max-width: 28rem;
+}
+
+.auth-form-inner--wide {
+    width: 100%;
+    max-width: 32rem;
+}
+>>>>>>> 4f7b9fde72f0ee141440f33136d7bead34eb9b0a
