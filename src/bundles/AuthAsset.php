@@ -11,6 +11,7 @@ class AuthAsset extends AssetBundle
 
     public $css = [
         'css/auth.css',
+        'css/auth-custom.css',
     ];
 
     public $depends = [
