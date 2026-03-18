@@ -46,12 +46,12 @@ $this->title = 'OAuth Login Callback';
 <div class="container">
     <?php if ($success): ?>
         <div class="success">
-            <h2><?= Module::t('Sign in successful') ?></h2>
+            <h2><?= Module::t('Log in successful') ?></h2>
             <p><?= Module::t('You have successfully signed in using OAuth.') ?></p>
         </div>
     <?php else: ?>
         <div class="error">
-            <h2><?= Module::t('Sign in failed') ?></h2>
+            <h2><?= Module::t('Log in failed') ?></h2>
             <p class="message"><?= $error ?? Module::t('An unknown error occurred.') ?></p>
         </div>
     <?php endif; ?>
