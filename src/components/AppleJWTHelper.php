@@ -21,18 +21,18 @@ class AppleJWTHelper extends Component
     {
         // For debugging, log the values
         $privateKeyContent = Yii::$app->setting->getValue('auth::applePrivateKey');
-        
+
         if (empty($privateKeyContent)) {
             throw new \Exception('Apple private key not configured');
         }
 
         // Clean up the private key content
         $privateKeyContent = trim($privateKeyContent);
-        
+
         // Ensure proper PEM format
         if (strpos($privateKeyContent, '-----BEGIN') === false) {
-            $privateKeyContent = "-----BEGIN PRIVATE KEY-----\n" . 
-                chunk_split($privateKeyContent, 64, "\n") . 
+            $privateKeyContent = "-----BEGIN PRIVATE KEY-----\n" .
+                chunk_split($privateKeyContent, 64, "\n") .
                 "-----END PRIVATE KEY-----";
         }
 
@@ -54,10 +54,11 @@ class AppleJWTHelper extends Component
 
             // Use Firebase JWT to create the token
             $jwt = JWT::encode($payload, $privateKeyContent, 'ES256', $this->keyId);
-            
+
             return $jwt;
-            
-        } catch (\Exception $e) {
+
+        }
+        catch (\Exception $e) {
             Yii::error('Firebase JWT creation error: ' . $e->getMessage(), 'oauth');
             throw new \Exception('Failed to create Apple JWT: ' . $e->getMessage());
         }
@@ -88,8 +89,9 @@ class AppleJWTHelper extends Component
             }
 
             return $payload;
-            
-        } catch (\Exception $e) {
+
+        }
+        catch (\Exception $e) {
             Yii::error('Apple ID token decode error: ' . $e->getMessage(), 'oauth');
             return null;
         }

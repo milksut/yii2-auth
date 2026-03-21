@@ -31,6 +31,12 @@ if (empty($_heroSubtitle)) {
     $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
 }
 
+try {
+    $_layout = Yii::$app->setting->getValue('auth::layout_style') ?? 'split';
+} catch (\Exception $e) {
+    $_layout = 'split';
+}
+
 $_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin', 'google'];
 $_visibleIntegrations = [];
 foreach ($_integrationNames as $_name) {
@@ -43,13 +49,67 @@ foreach ($_integrationNames as $_name) {
         $_visibleIntegrations[$_name] = $_url;
     }
 }
+try {
+    $colorSetting = Yii::$app->setting->getValue('auth::box_gradient_colors');
+    $colors = explode(',', $colorSetting);
+    $color1 = trim($colors[0] ?? '#011f1b');
+    $color2 = trim($colors[1] ?? '#2ecc71');
+} catch (\Exception $e) {
+    $color1 = '#011f1b'; $color2 = '#2ecc71';
+}
+$boxGradient = "linear-gradient(135deg, {$color1} 0%, {$color2} 100%)";
 ?>
+
+<?php if ($_layout === 'single'): ?>
+<div class="position-fixed top-0 start-0 vw-100 vh-100 d-flex flex-column overflow-hidden bg-white" style="z-index: 9999; margin: 0; padding: 0;">
+    <!-- Centered Card Area -->
+    <div class="d-flex flex-column flex-grow-1 align-items-center justify-content-center w-100 pt-5">
+        <!-- Centered Logo -->
+        <div class="d-flex flex-column align-items-center mb-4">
+            <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
+                'alt' => $_appTitle,
+                'class' => 'auth-sl-header-icon',
+                'style' => 'width:48px;height:48px;'
+            ]) ?>
+            <span class="fw-bold fs-4 text-dark mt-2"><?= $_appTitle ?></span>
+        </div>
+        <!-- Centered Card -->
+        <div class="bg-white rounded-4 shadow-lg px-4 py-4" style="min-width:320px;max-width:400px;width:100%;">
+            <h3 class="card-title text-center mb-1 fw-bold text-dark">Password Recovery</h3>
+            <p class="text-center text-muted mb-3">Enter your email to receive recovery instructions.</p>
+            <?php $form = ActiveForm::begin([
+                'id' => 'request-password-reset-form',
+                'fieldConfig' => [
+                    'template' => "<div class=\"auth-sl-field\">{label}{input}\n{hint}\n{error}</div>",
+                    'labelOptions' => ['class' => 'auth-sl-label'],
+                ],
+            ]); ?>
+            <?= $form->field($model, 'email', ['options' => ['class' => 'mb-2']])->textInput([
+                'autofocus' => true,
+                'class' => 'auth-sl-input',
+                'placeholder' => Module::t('name@company.com'),
+            ]) ?>
+            <?= Html::submitButton('Send Reset Link', [
+                'class' => 'btn bg-white border border-2 border-success text-dark fw-bold w-100 mb-2',
+                'name' => 'reset-button',
+                'style' => 'border-radius: 0.375rem; padding: 0.7rem 1rem; font-size: 1rem;',
+            ]) ?>
+            <?php ActiveForm::end(); ?>
+            <p class="auth-sl-footer-text mb-0">
+                <?= Html::a('Back to Log in', ['/auth/default/login'], ['class' => 'auth-sl-link']) ?>
+            </p>
+        </div>
+    </div>
+</div>
+
+<?php else: ?>
+<!-- ======================== SPLIT (Two Columns) ======================== -->
 <div class="auth-fullscreen-wrapper">
     <div class="auth-left-panel mesh-gradient">
         <div class="auth-brand">
             <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
                 'alt' => $_appTitle,
-                'class' => 'auth-icon-md auth-brand-logo',
+                'class' => 'auth-logo-icon auth-brand-logo',
             ]) ?>
             <span class="auth-brand-name"><?= $_appTitle ?></span>
         </div>
@@ -84,7 +144,7 @@ foreach ($_integrationNames as $_name) {
             <div class="auth-mobile-logo">
                 <?= Html::img($iconBundle->baseUrl . '/favicon.ico', [
                     'alt' => $_appTitle,
-                    'class' => 'auth-icon-md',
+                    'class' => 'auth-logo-icon',
                 ]) ?>
                 <span class="auth-mobile-logo-name"><?= $_appTitle ?></span>
             </div>
@@ -117,3 +177,4 @@ foreach ($_integrationNames as $_name) {
         </div>
     </div>
 </div>
+<?php endif; ?>

@@ -293,7 +293,7 @@
 }
 
 .auth-input:focus {
-    border-color: #198754;
+    border-color: #1A531C;
     box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
     background-color: #ffffff;
     outline: none;
@@ -312,12 +312,12 @@
     align-items: center;
     justify-content: center;
     border-radius: 0.5rem;
-    border: 2px solid #198754 !important;
+    border: 2px solid #1A531C !important;
     background-color: #ffffff !important;
     padding: 0.75rem 1rem;
     font-size: 1rem;
     font-weight: 700;
-    color: #0f172a !important;
+    color: #ffffff !important;
     transition: background-color 0.15s ease, transform 0.1s ease;
     cursor: pointer;
 }
@@ -407,7 +407,7 @@
 /* Links */
 .auth-link {
     font-weight: 600;
-    color: #198754;
+    color: #1A531C;
     text-decoration: none;
 }
 
@@ -426,7 +426,7 @@
 
 .auth-footer a {
     font-weight: 600;
-    color: #198754;
+    color: #1A531C;
     text-decoration: none;
 }
 
