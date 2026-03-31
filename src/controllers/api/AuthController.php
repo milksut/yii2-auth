@@ -14,6 +14,10 @@ use portalium\auth\models\SignupForm;
 use portalium\user\models\User;
 use portalium\auth\components\OAuthClient;
 use portalium\auth\components\AppleJWTHelper;
+use portalium\auth\models\PasswordResetRequestForm;
+use portalium\auth\models\ResetPasswordForm;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
 use yii\rest\Controller;
 
 /**
@@ -53,7 +57,7 @@ class AuthController extends Controller
         // Rate limiting for API endpoints
         $behaviors['rateLimiter'] = [
             'class' => RateLimiter::class,
-            'only' => ['login', 'signup', 'google-signin', 'apple-signin'],
+            'only' => ['login', 'signup', 'google-signin', 'apple-signin', 'request-password-reset', 'reset-password'],
         ];
 
         return $behaviors;
@@ -262,6 +266,69 @@ class AuthController extends Controller
                 'updated_at' => $user->updated_at,
             ]
         ];
+    }
+
+    /**
+     * Request password reset - sends email with reset token
+     * 
+     * @return array
+     */
+    public function actionRequestPasswordReset()
+    {
+        $model = new PasswordResetRequestForm();
+        
+        if ($model->load(Yii::$app->request->getBodyParams(), '')) {
+            if ($model->validate()) {
+                if ($model->sendEmail()) {
+                    return [
+                        'message' => 'Check your email for further instructions.',
+                        'success' => true
+                    ];
+                } else {
+                    return $this->error(['PasswordReset' => 'Sorry, we are unable to reset password for the provided email address.']);
+                }
+            } else {
+                return $this->modelError($model);
+            }
+        } else {
+            return $this->error(['PasswordResetRequest' => 'Email (email) is required.']);
+        }
+    }
+
+    /**
+     * Reset password with token and new password
+     * 
+     * @return array
+     */
+    public function actionResetPassword()
+    {
+        $bodyParams = Yii::$app->request->getBodyParams();
+        $token = $bodyParams['token'] ?? null;
+        $password = $bodyParams['password'] ?? null;
+
+        if (!$token) {
+            return $this->error(['ResetPassword' => 'Token (token) is required.']);
+        }
+
+        if (!$password) {
+            return $this->error(['ResetPassword' => 'Password (password) is required.']);
+        }
+
+        try {
+            $model = new ResetPasswordForm($token);
+        } catch (InvalidParamException $e) {
+            return $this->error(['ResetPassword' => $e->getMessage()]);
+        }
+
+        $model->password = $password;
+        if ($model->validate() && $model->resetPassword()) {
+            return [
+                'message' => 'New password saved successfully.',
+                'success' => true
+            ];
+        } else {
+            return $this->modelError($model);
+        }
     }
 
     /**
