@@ -83,10 +83,10 @@ class LoginForm extends Model
                 }
             } else {
                 //If "User Status" is selected as "Active" in SMTP.
-                if (Yii::$app->setting->getValue('site::userStatus') == User::STATUS_ACTIVE) {
+                if (Yii::$app->setting->getValue('auth::user_status') == User::STATUS_ACTIVE) {
                     $user->status = User::STATUS_ACTIVE;
                     $user->save(false) ? $user : null;
-                } else if (Yii::$app->setting->getValue('site::userStatus') == User::STATUS_PASSIVE) {
+                } else if (Yii::$app->setting->getValue('auth::user_status') == User::STATUS_PASSIVE) {
                     $user->status = User::STATUS_PASSIVE;
                     $user->save(false) ? $user : null;
                 }
