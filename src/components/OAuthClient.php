@@ -118,9 +118,7 @@ class OAuthClient extends Component
                 $verifiedPayload = $client->verifyIdToken($idToken);
                 error_reporting($originalErrorReporting);
                 
-                if ($verifiedPayload) {
-                    Yii::info("Token verified successfully with client ID: {$clientId}", 'oauth');
-                    
+                if ($verifiedPayload) {                    
                     // Handle different return types from Google_Client
                     if (is_object($verifiedPayload)) {
                         if (method_exists($verifiedPayload, 'getPayload')) {

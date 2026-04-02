@@ -3,16 +3,12 @@
 namespace portalium\auth\controllers\web;
 
 use Exception;
-use Firebase\JWT\JWK;
-use Firebase\JWT\JWT;
 use InvalidArgumentException;
 use portalium\site\models\ResendVerificationEmailForm;
 use Yii;
-use yii\helpers\Html;
 use portalium\auth\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-//use yii\base\InvalidParamException;
 use portalium\auth\models\LoginForm;
 use yii\web\BadRequestHttpException;
 use portalium\auth\models\SignupForm;
