@@ -3,16 +3,12 @@
 namespace portalium\auth\controllers\web;
 
 use Exception;
-use Firebase\JWT\JWK;
-use Firebase\JWT\JWT;
 use InvalidArgumentException;
 use portalium\site\models\ResendVerificationEmailForm;
 use Yii;
-use yii\helpers\Html;
 use portalium\auth\Module;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-//use yii\base\InvalidParamException;
 use portalium\auth\models\LoginForm;
 use yii\web\BadRequestHttpException;
 use portalium\auth\models\SignupForm;
@@ -281,7 +277,7 @@ class DefaultController extends WebController
             $userId = Yii::$app->user->id;
             $userModel = User::findOne($userId);
             $userModel->email_verify = User::EMAIL_VERIFY;
-            $userModel->status = Yii::$app->setting->getValue('site::userStatus');
+            $userModel->status = Yii::$app->setting->getValue('auth::user_status');
             $userModel->save();
 
             return $this->goHome();
@@ -326,7 +322,7 @@ class DefaultController extends WebController
      */
     public function actionSignup()
     {
-        if (Yii::$app->setting->getValue('form::signup')) {
+        if (Yii::$app->setting->getValue('auth::web_signup')) {
             $model = new SignupForm();
             if ($model->load(Yii::$app->request->post())) {
                 if ($user = $model->signup()) {

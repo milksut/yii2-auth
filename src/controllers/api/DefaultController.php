@@ -4,7 +4,6 @@ namespace portalium\auth\controllers\api;
 
 use Exception;
 use Yii;
-use yii\filters\auth\HttpBearerAuth;
 use yii\filters\ContentNegotiator;
 use yii\filters\Cors;
 use yii\filters\RateLimiter;
@@ -17,7 +16,6 @@ use portalium\auth\components\AppleJWTHelper;
 use portalium\auth\models\PasswordResetRequestForm;
 use portalium\auth\models\ResetPasswordForm;
 use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
 use yii\rest\Controller;
 
 class DefaultController extends Controller
@@ -169,7 +167,6 @@ class DefaultController extends Controller
                 ];
             }
 
-            Yii::info('Google token verified for client: ' . ($userData['client_id'] ?? 'unknown'), 'oauth');
             return $this->processOAuthAuthentication($userData, 'Google');
 
         } catch (Exception $e) {

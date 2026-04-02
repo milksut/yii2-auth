@@ -198,7 +198,7 @@ $boxGradient = "linear-gradient(135deg, {$color1} 0%, {$color2} 100%)";
                 'style' => 'border-radius: 0.375rem; padding: 0.7rem 1rem; font-size: 1rem;',
             ]) ?>
             <?php ActiveForm::end(); ?>
-            <?php if (Yii::$app->setting->getValue('form::signup')): ?>
+            <?php if (Yii::$app->setting->getValue('auth::web_signup')): ?>
             <p class="auth-sl-footer-text mb-1">
                 <?= Module::t('New to {app}?', ['app' => $_appTitle]) ?>
                 <?= Html::a(Module::t('Sign up now'), ['/auth/default/signup'], ['class' => 'auth-sl-link']) ?>
@@ -370,7 +370,7 @@ $boxGradient = "linear-gradient(135deg, {$color1} 0%, {$color2} 100%)";
                 }
             }
             ?>
-            <?php if (Yii::$app->setting->getValue('form::signup')): ?>
+            <?php if (Yii::$app->setting->getValue('auth::web_signup')): ?>
                 <div class="auth-footer">
                     <?= Module::t("Don't have an account?") ?>
                     <?= Html::a(Module::t('Sign up'), ['/auth/default/signup']) ?>
