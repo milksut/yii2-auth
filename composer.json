@@ -14,6 +14,11 @@
 	"support" : {
 		"issues" : "https://github.com/portalium/yii2-auth/issues"
 	},
+	"require": {
+		"firebase/php-jwt": "dev-main",
+        "google/apiclient": "^1.1",
+		"portalium/yii2-site": "*"
+	},
 	"autoload" : {
 		"psr-4" : {
 			"portalium\\auth\\" : "src/"

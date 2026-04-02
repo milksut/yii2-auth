@@ -16,6 +16,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Google Client ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -25,6 +26,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Google Client Secret',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -34,6 +36,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Google Login Enabled',
             'value' => '0',
             'type' => Form::TYPE_CHECKBOX,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enable/Disable Google OAuth login'
             ])
@@ -46,6 +49,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'GitHub Client ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -55,6 +59,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'GitHub Client Secret',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -64,6 +69,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'GitHub Login Enabled',
             'value' => '0',
             'type' => Form::TYPE_CHECKBOX,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enable/Disable GitHub OAuth login'
             ])
@@ -76,6 +82,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Client ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -85,6 +92,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Client Secret',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -95,6 +103,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Team ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Your Apple Developer Team ID'
             ])
@@ -106,6 +115,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Key ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Your Apple Key ID'
             ])
@@ -117,6 +127,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Private Key',
             'value' => '',
             'type' => Form::TYPE_TEXTAREA,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Your Apple private key content (.p8 file content)',
                 'rows' => 10
@@ -129,6 +140,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Apple Login Enabled',
             'value' => '0',
             'type' => Form::TYPE_CHECKBOX,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enable/Disable Apple OAuth login'
             ])
@@ -141,6 +153,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Twitter Client ID',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -150,6 +163,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Twitter Client Secret',
             'value' => '',
             'type' => Form::TYPE_INPUTTEXT,
+            'is_preference' => 0,
             'config' => ''
         ]);
 
@@ -159,6 +173,7 @@ class m240917_000002_auth_oauth_settings extends Migration
             'label' => 'Twitter Login Enabled',
             'value' => '0',
             'type' => Form::TYPE_CHECKBOX,
+            'is_preference' => 0,
             'config' => json_encode([
                 'help' => 'Enable/Disable Twitter OAuth login'
             ])

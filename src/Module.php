@@ -9,9 +9,9 @@ class Module extends \portalium\base\Module
 {
     public static $tablePrefix = 'auth_';
     
-    public static $name = 'auth';
+    public static $name = 'Auth';
 
-    public static $description = 'auth Module';
+    public static $description = 'Auth Module';
 
     // Auth events
     const EVENT_ON_LOGIN = 'onLogin';
@@ -23,7 +23,6 @@ class Module extends \portalium\base\Module
             'class' => 'yii\rest\UrlRule',
             'controller' => [
                 'auth/default',
-                'auth/auth',
             ]
         ],
     ];
