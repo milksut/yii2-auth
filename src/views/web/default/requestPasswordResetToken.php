@@ -28,7 +28,7 @@ try {
     $_heroSubtitle = '';
 }
 if (empty($_heroSubtitle)) {
-    $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
+    $_heroSubtitle = Module::t('Manage your entire organization with a single login.');
 }
 
 try {
