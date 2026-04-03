@@ -52,7 +52,7 @@ try {
     $_heroSubtitle = '';
 }
 if (empty($_heroSubtitle)) {
-    $_heroSubtitle = Module::t('Manage your entire workflow, deployments, and team communication from a single, unified interface.');
+    $_heroSubtitle = Module::t('Manage your entire organization with a single login.');
 }
 
 $_integrationNames = ['slack', 'github', 'jira', 'notion', 'linkedin', 'google'];
@@ -73,10 +73,10 @@ foreach ($_integrationNames as $_name) {
    Uses Yii::$app->setting with hardcoded fallbacks so boxes are never blank.
    ========================================================================== */
 $_featureDefaults = [
-    1 => ['icon' => 'feature-vision.svg',      'title' => Module::t('Vision To Insight'),       'desc' => Module::t('Transform raw data into actionable visual intelligence.')],
-    2 => ['icon' => 'feature-ai.svg',           'title' => Module::t('Real-Time AI'),            'desc' => Module::t('Leverage AI-powered analytics in real time.')],
-    3 => ['icon' => 'feature-data.svg',         'title' => Module::t('Data To Action'),          'desc' => Module::t('Convert complex datasets into clear decisions.')],
-    4 => ['icon' => 'feature-productivity.svg', 'title' => Module::t('Increase Productivity'),   'desc' => Module::t('Streamline workflows and boost team efficiency.')],
+    1 => ['icon' => 'feature-portalium.svg', 'title' => Module::t('Portalium-Powered'), 'desc' => Module::t('Built on the Portalium platform for seamless integration and performance.')],
+    2 => ['icon' => 'feature-ai.svg',         'title' => Module::t('CRUD Entegration'), 'desc' => Module::t('Comes with built-in CRUD operations for easy data management.')],
+    3 => ['icon' => 'feature-data.svg',       'title' => Module::t('Customizable'),       'desc' => Module::t('Highly customizable to fit your specific authentication needs.')],
+    4 => ['icon' => 'feature-productivity.svg', 'title' => Module::t('Secure & Reliable'), 'desc' => Module::t('Ensures top-notch security and reliability for your authentication processes.')],
 ];
 $_features = [];
 foreach ($_featureDefaults as $_i => $_def) {

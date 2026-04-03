@@ -25,7 +25,7 @@ class m260314_000003_add_login_text_settings extends Migration
             'module' => 'auth',
             'name' => 'auth::login_hero_subtitle',
             'label' => 'Login Hero Subtitle',
-            'value' => 'Manage your entire workflow, deployments, and team communication from a single, unified interface.',
+            'value' => 'Manage your entire organization with a single login',
             'type' => Form::TYPE_INPUTTEXT,
             'is_preference' => 0,
             'config' => json_encode([
