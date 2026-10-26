@@ -15,6 +15,7 @@ use portalium\auth\components\OAuthClient;
 use portalium\auth\components\AppleJWTHelper;
 use portalium\auth\models\PasswordResetRequestForm;
 use portalium\auth\models\ResetPasswordForm;
+use portalium\auth\components\SmsVerificationService;
 use portalium\helpers\RestHelper;
 use yii\base\InvalidParamException;
 use yii\rest\Controller;
@@ -246,10 +247,74 @@ class DefaultController extends Controller
                 'username' => $user->username,
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
+                'tel_no' => $user->tel_no,
+                'sms_verified' => (int) $user->sms_verified,
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
             ]
         ];
+    }
+
+    public function actionRequestSmsVerification()
+    {
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->response->statusCode = 401;
+            return [
+                'success' => false,
+                'error' => 'authentication_required',
+                'message' => 'Authentication required',
+            ];
+        }
+
+        $telNo = Yii::$app->request->getBodyParam('tel_no');
+        if (empty($telNo)) {
+            Yii::$app->response->statusCode = 400;
+            return [
+                'success' => false,
+                'error' => 'tel_no_required',
+                'message' => 'Telephone number (tel_no) is required',
+            ];
+        }
+
+        $result = (new SmsVerificationService())->requestCode($telNo);
+
+        if (!$result['success']) {
+            Yii::$app->response->statusCode = $result['http_status'];
+            unset($result['http_status']);
+        }
+
+        return $result;
+    }
+
+    public function actionVerifySmsVerification()
+    {
+        if (Yii::$app->user->isGuest) {
+            Yii::$app->response->statusCode = 401;
+            return [
+                'success' => false,
+                'error' => 'authentication_required',
+                'message' => 'Authentication required',
+            ];
+        }
+
+        $code = Yii::$app->request->getBodyParam('code');
+        if (empty($code)) {
+            Yii::$app->response->statusCode = 400;
+            return [
+                'success' => false,
+                'error' => 'code_required',
+                'message' => 'Verification code (code) is required',
+            ];
+        }
+
+        $result = (new SmsVerificationService())->verifyCode($code);
+
+        if (!$result['success']) {
+            Yii::$app->response->statusCode = $result['http_status'];
+            unset($result['http_status']);
+        }
+
+        return $result;
     }
 
     /**
