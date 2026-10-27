@@ -19,6 +19,8 @@ use portalium\auth\components\SmsVerificationService;
 use portalium\helpers\RestHelper;
 use yii\base\InvalidParamException;
 use yii\rest\Controller;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBearerAuth;
 
 class DefaultController extends Controller
 {
@@ -28,7 +30,10 @@ class DefaultController extends Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        
+
+        // remove it so it can be re-added after CORS
+        unset($behaviors['authenticator']);
+
         // CORS support for mobile apps
         $behaviors['corsFilter'] = [
             'class' => Cors::class,
@@ -39,6 +44,14 @@ class DefaultController extends Controller
                 'Access-Control-Allow-Credentials' => true,
                 'Access-Control-Max-Age' => 86400,
             ],
+        ];
+
+         $behaviors['authenticator'] = [
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBearerAuth::class,
+            ],
+            'only' => ['profile', 'request-sms-verification', 'verify-sms-verification'],
         ];
 
         // Content negotiation - always JSON
