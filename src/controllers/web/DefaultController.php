@@ -113,12 +113,19 @@ class DefaultController extends WebController
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(Yii::$app->request->post()) && $model->login()) 
+        {
             if (Yii::$app->setting->getValue('app::language')) {
                 Yii::$app->session->set('lang', Yii::$app->setting->getValue('app::language'));
             }
             return $this->goBack();
-        } else {
+        } 
+        else 
+        {
+            if ($model->hasErrors() && !Yii::$app->session->hasFlash('error')) 
+            {
+                Yii::$app->session->setFlash('error', Module::t('Invalid credentials or account not verified'));
+            }
             return $this->render('login', [
                 'model' => $model,
             ]);
