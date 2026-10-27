@@ -87,7 +87,7 @@ class DefaultController extends Controller
         Yii::$app->response->statusCode = 401;
         return [
             'success' => false,
-            'message' => 'Invalid credentials',
+            'message' => 'Invalid credentials or account not verified',
             'errors' => $model->getErrors()
         ];
     }
@@ -102,13 +102,13 @@ class DefaultController extends Controller
         $model = new SignupForm();
         
         if ($model->load(Yii::$app->request->getBodyParams(), '') && ($user = $model->signup())) {
-            // Auto-activate for mobile registrations
-            $user->status = User::STATUS_ACTIVE;
-            $user->email_verify = User::EMAIL_VERIFY;
-            $user->save(false);
+            // // Auto-activate for mobile registrations
+            // $user->status = User::STATUS_ACTIVE;
+            // $user->email_verify = User::EMAIL_VERIFY;
+            // $user->save(false);
             
-            // Auto-login after signup
-            Yii::$app->user->login($user, 3600 * 24 * 30); // 30 days
+            // // Auto-login after signup
+            // Yii::$app->user->login($user, 3600 * 24 * 30); // 30 days
             
             return [
                 'success' => true,
